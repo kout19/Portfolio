@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
-// const { MongoClient, ServerApiVersion } = require('mongodb');
-const uri = "mongodb+srv://kefyalew:kefie123@portfolio.ks4kt.mongodb.net/?retryWrites=true&w=majority&appName=Portfolio";
+const dotenv = require('dotenv');
+dotenv.config();
+const uri = process.env.MONGO_URI;
 
 async function runDB() {
   try {
