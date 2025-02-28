@@ -7,11 +7,11 @@ import FetchBlogs from './renderBlogs';
 
 const AdminDashboard = () => {
   const [selectedComponent, setSelectedComponenet] = useState('fetchBlogs');
-  const fetchingRole = async () => {
-     const response = await axios.get('http://localhost:5000/api/signin');
-  console.log(response.data);
-  }
-  fetchingRole();
+  //const fetchingRole = async () => {
+//  const response = await axios.post('http://localhost:5000/api/signin');
+//   console.log(response.data);
+//   }
+//   fetchingRole();
   const renderComponent = () => {
     
     switch (selectedComponent) {

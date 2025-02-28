@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import axios, { AxiosHeaders } from 'axios';
+import axios from 'axios';
 const DashboardHeader = () => {
   const navigate = useNavigate();
   const [showDropdown, setShowDropdown] = useState(false);
   const [unreadCount, setUnreadCount] = useState(0);
   const [notifications, setNotifications] = useState([]);
   const [isNotificationsVisible, setIsNotificationsVisible] = useState(false);
- 
+  const [selectedNotification, setSelectedNotification] = useState(null);
+  // const [deleteNotification, setDeleteNotification] = useState(null);
+  //Fetch notifications
     const fetchNotifications = async () => {
       try {
         const response = await axios.get('http://localhost:5000/notifications');
@@ -29,7 +31,6 @@ const DashboardHeader = () => {
       console.log("Error fetching unread count", error);
     }
   };
-  
   //Mark all notifications s Read
   const markAsRead = async (messageId) => {
     try {
@@ -54,6 +55,35 @@ const DashboardHeader = () => {
       return newState;
    });
   }
+// Read each notification details
+const handleNotificationClick = async (notificationId) => {
+  try {
+    const response = await fetch(`http://localhost:5000/notifications/${notificationId}`);
+    const data = await response.json();
+    console.log(data);
+    setSelectedNotification(data);
+  } catch (error) {
+    console.error("Error fetching notification details:", error);
+  }
+};
+//Delete notification
+const handleDeleteNotification = async (notificationId, event) => {
+  event.stopPropagation();
+  try {
+    const response = await axios.delete(`http://localhost:5000/notifications/${notificationId}`);
+    // console.log(response.data);
+      setNotifications((prev) => prev.filter((notification) =>notification._id !== notificationId));
+      // setSelectedNotification(null);
+      console.log("Notification deleted successfully");
+      // window.location.reload();
+  }
+  catch (error) {
+    console.error("Error deleting notification", error);
+  }
+};
+  //Navigate to the notification related entity
+  
+
   //Lgining out
   const hanldeLogout = () => {
     localStorage.removeItem('token');
@@ -72,6 +102,7 @@ const DashboardHeader = () => {
     }
   }, [isNotificationsVisible]);
   
+
  return (
     <header className="flex items-center justify-between bg-blue-300 p-4 shadow-md">
       {/* Logo or Dashboard Title */}
@@ -95,7 +126,7 @@ const DashboardHeader = () => {
        )}
         {/* Notifications Dropdown */}
         {isNotificationsVisible && (
-          <div className="absolute right-0 mt-2 w-64 bg-white rounded-md shadow-lg mt-[280px]">
+          <div className="absolute right-0 top-16 mt-2  bg-white rounded-md shadow-lg z-10 overflow-y-auto max-h-96 " style={{width: '40rem'}}>
             <div className="px-4 py-2 border-b border-gray-300 flex justify-between items-center">
              <span className="font-bold text-gray-700">Notifications</span>
              
@@ -112,13 +143,22 @@ const DashboardHeader = () => {
                 notifications.map((notification) => (
                   <li
                     key={notification._id}
+                    onClick={() => {handleNotificationClick(notification._id)
+                    notifications.filter((notification) => notification._id ===notification._id).forEach((message) =>markAsRead(message._id))
+                    }}
+                    
                     className={`px-4 py-2 text-sm  ${
                       notification.status === "read"
                         ? "text-gray-500"
-                        : "text-blue-800 font-bold"
-                    } hover:bg-gray-100`}
+                        : "text-blue-800 font-bold "
+                    } hover:bg-gray-100 cursor-pointer`}
                   >
                     {notification.message}
+                    <button
+                      onClick={(event) => handleDeleteNotification(notification._id, event)}
+                      className=" ml-4 text-sm text-red-500 hover:underline">
+                      Delete
+                      </button>
                   </li>
                 ))
               ) : (
@@ -127,6 +167,28 @@ const DashboardHeader = () => {
                 </li>
               )}
             </ul>
+            {selectedNotification && (
+              <div className="p-4 border-t border-gray-300">
+                <h3 className="text-lg font-bold text-gray-700">
+                  Notification Details
+                </h3>
+                <p className="text-sm text-gray-500">
+                  {selectedNotification.message}
+                </p>
+                <p className="text-sm text-gray-500">
+                  {selectedNotification.createdAt}
+                </p>
+                <p className="text-sm text-gray-500">
+                  {selectedNotification.relatedEntity?.name}
+                </p>
+                <p className="text-sm text-gray-500"> 
+                  {selectedNotification.relatedEntity?.email}
+                </p>
+                <p className="text-sm text-gray-500">
+                  {selectedNotification.relatedEntity?.message}
+                </p>
+              </div>
+            )}
           </div>
         )}
 

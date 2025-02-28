@@ -1,7 +1,8 @@
-import React from "react";
-import { useForm } from "react-hook-form";
+import React, { useState } from "react";
+import {  useForm } from "react-hook-form";
 const Contact = () => {
-  const { register, handleSubmit, formState: { errors } } = useForm();
+  const { register, handleSubmit, formState: { errors } ,reset } = useForm();
+  const [sent, setSent] =useState(false);
   const onSubmmit = async (data,e) => {
     console.log("Form data submitted");
     try {
@@ -14,9 +15,12 @@ const Contact = () => {
       });
        const result = await response.json();
       if (response.ok) {
-        alert("Your message has been sent");
+        // alert("Your message has been sent");
+        setSent(true);
+        reset();
       }
       else {
+      setSent(false);
         console.log("Error submitting form", response.statusText);
         alert("There was an error submitting your form");
       }
@@ -51,6 +55,15 @@ const Contact = () => {
           {errors.message && <p className="text-red-500 text-sm">{errors.message.message}</p>}
         </div>
         <button type="submit" className="px-4 py-2 bg-blue-500 text-white rounded">Send</button>
+        {sent && 
+        (
+        <>
+        <div className="bg-green-100 border-l-4 border-green-500 text-green-700 p-4 mt-4" role="alert">
+        <p className="text-green-500 text-sm mt-2">Your message has been sent. Thank you for contacting me.</p>
+        <p className="text-green-500 text-sm mt-2">I will contact you soon!</p>
+        </div>
+        </>
+        )}
       </form>
     </div>
   );

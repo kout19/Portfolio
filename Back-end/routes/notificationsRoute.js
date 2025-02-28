@@ -11,10 +11,15 @@ router.get('/count', async (req, res) => {
 });
 router.get('/', async (req, res) => {
   try {
-    const notification = await Notification.find().sort({ createdAt: -1 });
+    const notification = await Notification.find()
+    .sort({ createdAt: -1 })
+    .limit(10);
+    if(!notification) {
+      return res.status(404).json({ message: "Notification not found" });
+    }
     res.status(200).json(notification);
    } catch (error) {
-    res.status(500).json({ error: "Error fetching notifications" });
+    res.status(500).json({ error: "Error fetching notifications",error });
   }
   
 });
@@ -36,5 +41,34 @@ router.patch('/messages/:id/read', async (req, res) => {
     console.log(error);
     res.status(500).json({ message: "Server error" });
   }
+});
+router.get('/:id', async (req, res) => {
+  try {
+    const readNotificaiton = await Notification.findById(req.params.id).populate('relatedEntity');
+    if (!readNotificaiton) {
+      return res.status(404).json({ message: "Notification not found" });
+    }
+    res.status(200).json(readNotificaiton);
+  } catch (error) {
+    res.status(500).json({ error: "Error to read notification",error });
+  }
+}
+);
+router.delete('/:id', async(req, res)=>{
+  try{
+  const notificationId = req.params.id;
+
+  // Find and delete the notification by ID
+  const deletedNotification = await Notification.findByIdAndDelete(notificationId);
+
+  if (!deletedNotification) {
+    return res.status(404).json({ message: "Notification not found" });
+  }
+
+  res.status(200).json({ message: "Notification deleted successfully" });
+} catch (err) {
+  console.error("Error deleting notification", err);
+  res.status(500).json({ message: "Server error" });
+}
 });
 module.exports = router;

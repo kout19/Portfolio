@@ -16,7 +16,7 @@ const notificationSchema =  mongoose.Schema({
   },
   relatedEntity: {
     type: mongoose.Schema.Types.ObjectId,
-    ref:'contacts',
+    ref:'Contact',
   },
   createdAt: {
     type: Date,
@@ -26,5 +26,12 @@ const notificationSchema =  mongoose.Schema({
     type: Date,
   },
 });
+
+notificationSchema.post("findOneAndDelete", async function (doc) {
+  if (doc && doc.relatedEntity) {
+    await mongoose.model("Contact").findByIdAndDelete(doc.relatedEntity);
+  }
+});
+
 const Notification = mongoose.model('Notification', notificationSchema);
 module.exports = Notification;

@@ -4,10 +4,11 @@ import {useNavigate } from "react-router-dom";
 import axios from 'axios';
 const SingInForms = ({visible,onClose}) => {
   const [isSignUp, setisSignUP] = useState(false);
+  const [error, setError]=useState("");
   const { register, handleSubmit, formState: { errors }, } = useForm();
   const navigate = useNavigate();
   const onSubmit = async (data) => {
-    console.log('Form Data', data);
+    // console.log('Form Data', data);
     const url = isSignUp ? 'http://localhost:5000/api/signup'
       : 'http://localhost:5000/api/signin';
     try {
@@ -17,10 +18,11 @@ const SingInForms = ({visible,onClose}) => {
         },
       });
       console.log("response", response);
-      alert(response.data.message);
-      if (!isSignUp) {    
+      // alert(response.data.message);
+      if (!isSignUp) {   
         localStorage.setItem('token', response.data.token);
         navigate("/admin/dashboard");
+        // isSignUp =!isSignUp; 
       }
       // if (response.status===201) {
       //   alert('Signup successfull')
@@ -29,11 +31,11 @@ const SingInForms = ({visible,onClose}) => {
       //   alert('signup failed, please try again');
       // }
     } catch (err) {
-      console.log('Error:', err.response?.data || err.message);
-      alert(err.response?.data?.err || 'Somthing went wrong');
+      // console.log('Error:', err.response?.data?.error);
+      // alert(err.response?.data?.err || 'Somthing went wrong');
+      setError( err.response?.data?.error || 'Somthing went wrong');
     }
   };
-
 
   if (!visible) return null;
   return (
@@ -45,7 +47,7 @@ const SingInForms = ({visible,onClose}) => {
           X
         </button>
         <h2 className="text-xl font-bold mb-4 text-center">
-          {isSignUp?'Sign UP': 'Sign In'}
+          {isSignUp?'Sign Up': 'Sign In'}
         </h2>
         <form  onSubmit={handleSubmit(onSubmit)}>
           {isSignUp && (
@@ -98,15 +100,30 @@ const SingInForms = ({visible,onClose}) => {
           </div>
           <button 
             type="submit"
-            className="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700">
+            className={`button ${isSignUp?'bg-gray-400 text-gray-700 cursor-not-allowed': 'hover:bg-blue-700'} 
+             w-full bg-blue-600 text-white py-2 rounded `}
+             disabled={isSignUp}>
             {isSignUp ? 'Sign Up' : 'Sign In'}
           </button>
+          {error && <p className="text-red-500 text-sm mt-2">{error}</p>}
         </form>
         <p className="mt-4 text-center">
-          {isSignUp ? 'Already have an account' : "Don't have an account?"}{' '}
+          
+          {isSignUp ? 
+          (
+            <>
+            <p style={{color:'red'}}>Sorry!, you can't sign up right now.</p>
+            <small>Already have an account?</small>
+          </> 
+          ):
+          (
+            <>
+            <small>Don't have an account?</small>
+          </>
+          )}
           <button onClick={() => setisSignUP(!isSignUp)}
             className="text-blue-600 hover:underline">
-            {isSignUp? 'Sign In': 'Sign UP'}
+            {isSignUp? ' Sign In': ' Sign Up'}
           </button>
         </p>
       </div>

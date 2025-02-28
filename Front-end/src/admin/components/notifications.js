@@ -4,6 +4,7 @@ const Notifications = () => {
   const [notifications, setNotifications] = useState([]);
   const [unreadCount, setUnreadCount] = useState(0);
   const [showNotifications, setShowNotifications] = useState(false);
+  const [selectedNotification, setSelectedNotification] = useState(null);
   useEffect(() => {
     const fetchUnreadCount = async () => {
       try {
@@ -24,6 +25,17 @@ const Notifications = () => {
       console.log('Error fetching notifications:', error);
     }
   };
+  const readNotifications = async (id) => {
+    try {
+      const response = await axios.patch(`http://localhost:5000/notifications/messages/${id}/read`);
+      console.log('Notification status updated:', response.data);
+      setSelectedNotification(response.data.data);
+      console.log('Selected Notification:', selectedNotification);
+      fetchNotifications();
+    } catch (error) {
+      console.log('Error updating notification status:', error);
+    }
+  }
 
   return (
     <div>

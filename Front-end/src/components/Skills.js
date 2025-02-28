@@ -1,35 +1,37 @@
 import React, { useState } from 'react'
 import 'devicon/devicon.min.css';
+import { motion } from "framer-motion";
 
 const Skills = () => {
   const [showSkills, setShowSkills] = useState(true);
   const [activeButton, setActiveButton] = useState('button');
   const frontEndSkills = [
-    { name: "HTML", icon: "devicon-html5-plain colored" },
-    { name: "CSS", icon: "devicon-css3-plain colored" },
-    { name: "Tailwind", icon: "devicon-tailwind-original colored" },
-    {name:"Bootstrap",icon:"devicon-bootstrap-plain colored"},
-    { name: "JavaScript", icon: "devicon-javascript-plain colored" },
-    { name: "React", icon: "devicon-react-original colored" }
+    { name: "HTML", icon: "devicon-html5-plain colored", gradient: "from-red-500 to-yellow-500" },
+    { name: "CSS", icon: "devicon-css3-plain colored", gradient: "from-red-500 to-yellow-500" },
+    { name: "TailwindCSS", icon: "devicon-tailwindcss-plain colored", gradient: "from-red-500 to-yellow-500" },
+    {name:"Bootstrap",icon:"devicon-bootstrap-plain colored", gradient: "from-red-500 to-yellow-500"},
+    { name: "JavaScript", icon: "devicon-javascript-plain colored", gradient: "from-red-500 to-yellow-500" },
+    { name: "React", icon: "devicon-react-original colored", gradient: "from-red-500 to-yellow-500" },
+    { name: "jQuery", icon: "devicon-jquery-plain colored", gradient: "from-red-500 to-yellow-500" },
   ];
   const backEndSkills = [
-    { name: "Node.js", icon: "devicon-nodejs-plain colored" },
-    { name: "express", icon: "devicon-express-original colored" },
+    { name: "Node.js", icon: "devicon-nodejs-plain colored", gradient: "from-red-500 to-yellow-500" },
+    { name: "Express", icon: "devicon-express-original colored", gradient: "from-red-500 to-yellow-500" },
     {
-      name: "PHP", icon:"devicon-php-plain colored"},
-    { name: "mongoDB", icon: "devicon-mongodb-plain colored" }
+      name: "PHP", icon:"devicon-php-plain colored", gradient: "from-red-500 to-yellow-500"},
   ];
-  const versionControlSkills = [
-    { name: "Git", icon: "devicon-git-plain colored" },
-    { name: "Github", icon: "devicon-github-original colored" },
-  ];
-  const apiSkills = [
-    { name: "REST", icon: "devicon-api-plain colored" },
-    { name: "graphQL", icon: "devicon-graphql-plain colored" },
+  const databaseSkills = [
+    { name: "MySQL", icon: "devicon-mysql-plain colored", gradient: "from-red-500 to-yellow-500" },
+    { name: "firebase", icon: "devicon-firebase-plain colored", gradient: "from-red-500 to-yellow-500" },
+    { name: "SQLite", icon: "devicon-sqlite-plain colored", gradient: "from-red-500 to-yellow-500" },
+    { name: "MongoDB", icon: "devicon-mongodb-plain colored", gradient: "from-red-500 to-yellow-500" },
   ];
   const toolsSkills =[
-    { name: "Docker", icon: "devicon-docker-plain colored" },
-    {name:"npm", icon:"devicon-npm-original-wordmark colored"}, 
+    { name: "Stripe", icon: "devicon-stripe-plain colored", gradient: "from-red-500 to-yellow-500" },
+    {name:"npm", icon:"devicon-npm-original-wordmark colored", gradient: "from-red-500 to-yellow-500"}, 
+    { name: "REST", icon: "devicon-postgresql-plain colored", gradient: "from-red-500 to-yellow-500" },
+    {name: "Postman", icon:"devicon-postman-plain colored", gradient: "from-red-500 to-yellow-500"},
+    { name: "Git", icon: "devicon-git-plain colored", gradient: "from-red-500 to-yellow-500" },
   ]
   const renderSkills = () => {
     switch (showSkills) {
@@ -37,10 +39,8 @@ const Skills = () => {
         return frontEndSkills;
       case "backend":
         return backEndSkills;
-      case "versioncontrol":
-        return versionControlSkills;
-      case "api":
-        return apiSkills;
+        case "database":
+        return databaseSkills;
       case "tools":
         return toolsSkills;
       default:
@@ -54,34 +54,39 @@ const Skills = () => {
         <h2 className="text-3xl font-bold text-center mb-8">Skills</h2>
         <div className="grid grid-cols-3 lg:grid-cols-6 gap-6">
           <button onClick={() => setShowSkills("frontend")}
-            className="px-2 py-1 bg-blue-500 text-white rounded-xl hover:bg-blue-600 w-auto">
+            className="px-2 py-3 bg-blue-700 text-white rounded-sm hover:bg-blue-600 w-auto">
             Front End
           </button>
           <button onClick={() => setShowSkills("backend")}
-            className="px-2 py-1 bg-blue-500 text-white rounded-xl hover:bg-blue-600 w-auto">
+            className="px-2 py-1 bg-blue-700 text-white rounded-sm hover:bg-blue-600 w-auto">
             Back End
           </button>
-        <button onClick={() => setShowSkills("versioncontrol")}
-            className="px-1 py-1  w-auto bg-blue-500 text-white rounded-xl hover:bg-blue-600">
-            Version Control
-        </button>
-         <button onClick={() => setShowSkills("api")}
-            className="px-1 py-1 bg-blue-500 text-white rounded-xl hover:bg-blue-600 w-auto">
-            APIs
-        </button>
+          <button onClick={() => setShowSkills("database")}
+            className="px-2 py-1 bg-blue-700 text-white rounded-sm hover:bg-blue-600 w-auto">
+            Database
+          </button>
          <button onClick={() => setShowSkills("tools")}
-            className="px-1 py-1 bg-blue-500  text-white rounded-xl hover:bg-blue-600 w-auto">
+            className="px-1 py-1 bg-blue-700  text-white rounded-sm hover:bg-blue-600 w-auto">
             Tools
         </button>
         </div>
         
-       <div className="skills-icon  grid grid-cols-5 lg:grid-cols-8   gap-2 ">
-          {renderSkills().map((skill) => (
-            <div key={skill.name}
-              className={`text-center rounded text-white border mt-3 lg:w-[100px] sm:p-2`}>
+       <div className="skills-icon  grid grid-cols-5 lg:grid-cols-8 gap-2 
+       overflow-visible h-32 mt-3">
+          {renderSkills().map((skill,index) => (
+
+            <motion.div 
+            key={skill.name}
+            initial={{ opacity: 0, y: 50 }}
+             animate={{ opacity: 1, y: 0 }}
+             transition={{ duration: 0.5, delay: index * 0.1 }}
+             className={`flex flex-col mt-3 items-center p-5 rounded-xl 
+              shadow-md bg-gradient-to-r ${skill.gradient} 
+              text-white transition-transform transform 
+              duration-300 hover:scale-110`}>
               <i className={`${skill.icon} text-2xl`}/>
               <p className="mt-1">{skill.name}</p>
-            </div>
+            </motion.div>
           ))}
         </div>
      </div>
