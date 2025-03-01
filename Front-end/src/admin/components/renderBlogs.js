@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+const uri=process.env.REACT_APP_BACKEND_URL;
 const FetchBlogs = () => {
   const [posts, setPosts] = useState([]);
   const [likes, setLikes] = useState({});
   const fetchBlogsPost = async () => {
     try {
-      const response = await axios.get('http://localhost:5000/admin/blogs/data');
+      const response = await axios.get(`${uri}/admin/blogs/data`);
       // console.log(response.data);
       response.data.map((obj) => {
         // console.log(obj.image.url)
@@ -26,7 +27,7 @@ const FetchBlogs = () => {
   }
   const handleDelete = async (postId) => {
     try {
-      await axios.delete(`http://localhost:5000/admin/blogs/${postId}`);
+      await axios.delete(`${uri}/admin/blogs/${postId}`);
       setPosts(posts.filter(post => post._id !== postId));
       
     }catch(error){

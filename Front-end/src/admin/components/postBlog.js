@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useForm } from 'react-hook-form';
 import axios from "axios";
 import ReactQuill from 'react-quill';
+const uri=process.env.REACT_APP_BACKEND_URL;
 const PostBlog = () => {
   const { register, handleSubmit, reset,setValue, trigger } = useForm();
   const [content, setContenet] = useState('');
@@ -49,7 +50,7 @@ const PostBlog = () => {
       return;
     }
     try {
-      const response = await axios.post('http://localhost:5000/admin/blogs', formData, {
+      const response = await axios.post(`${uri}/admin/blogs`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },

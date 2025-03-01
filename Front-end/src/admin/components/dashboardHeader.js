@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from 'axios';
+const uri=process.env.REACT_APP_BACKEND_URL;
 const DashboardHeader = () => {
   const navigate = useNavigate();
   const [showDropdown, setShowDropdown] = useState(false);
@@ -12,7 +13,7 @@ const DashboardHeader = () => {
   //Fetch notifications
     const fetchNotifications = async () => {
       try {
-        const response = await axios.get('http://localhost:5000/notifications');
+        const response = await axios.get(`${uri}/notifications`);
         setNotifications(response.data);
         console.log(response.data);
       } catch (error) {
@@ -22,7 +23,7 @@ const DashboardHeader = () => {
   //Count new notificaitons
   const fetchUnreadCount = async () => {
     try {
-      const response = await axios.get("http://localhost:5000/notifications");
+      const response = await axios.get(`${uri}/notifications`);
       const count = response.data.filter(
         (notification)=>notification.status==="unread"
       ).length;
@@ -34,7 +35,7 @@ const DashboardHeader = () => {
   //Mark all notifications s Read
   const markAsRead = async (messageId) => {
     try {
-      const response = await axios.patch(`http://localhost:5000/notifications/messages/${messageId}/read`);
+      const response = await axios.patch(`${uri}/notifications/messages/${messageId}/read`);
       console.log(response.data);
       setNotifications((prev) =>
         prev.map((notification) => ({ ...notification, status: 'read' }))
@@ -58,7 +59,7 @@ const DashboardHeader = () => {
 // Read each notification details
 const handleNotificationClick = async (notificationId) => {
   try {
-    const response = await fetch(`http://localhost:5000/notifications/${notificationId}`);
+    const response = await fetch(`${uri}/notifications/${notificationId}`);
     const data = await response.json();
     console.log(data);
     setSelectedNotification(data);
@@ -70,7 +71,7 @@ const handleNotificationClick = async (notificationId) => {
 const handleDeleteNotification = async (notificationId, event) => {
   event.stopPropagation();
   try {
-    const response = await axios.delete(`http://localhost:5000/notifications/${notificationId}`);
+    const response = await axios.delete(`${uri}/notifications/${notificationId}`);
     // console.log(response.data);
       setNotifications((prev) => prev.filter((notification) =>notification._id !== notificationId));
       // setSelectedNotification(null);

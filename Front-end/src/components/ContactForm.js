@@ -1,12 +1,14 @@
 import React, { useState } from "react";
 import {  useForm } from "react-hook-form";
+const uri=process.env.REACT_APP_BACKEND_URL;
 const Contact = () => {
   const { register, handleSubmit, formState: { errors } ,reset } = useForm();
   const [sent, setSent] =useState(false);
   const onSubmmit = async (data,e) => {
     console.log("Form data submitted");
+    console.log(uri);
     try {
-      const response = await fetch("http://localhost:5000/submit-contact", {
+      const response = await fetch(`${uri}/submit-contact`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

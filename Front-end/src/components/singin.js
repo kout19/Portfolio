@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import {useNavigate } from "react-router-dom";
 import axios from 'axios';
+const uri=process.env.REACT_APP_BACKEND_URL;
 const SingInForms = ({visible,onClose}) => {
   const [isSignUp, setisSignUP] = useState(false);
   const [error, setError]=useState("");
@@ -9,8 +10,8 @@ const SingInForms = ({visible,onClose}) => {
   const navigate = useNavigate();
   const onSubmit = async (data) => {
     // console.log('Form Data', data);
-    const url = isSignUp ? 'http://localhost:5000/api/signup'
-      : 'http://localhost:5000/api/signin';
+    const url = isSignUp ? `${uri}/api/signup`
+      : `${uri}/api/signin`;
     try {
       const response = await axios.post(url, data,{
         headers: {
