@@ -49,12 +49,13 @@ const Skills = () => {
   };
 
   return (
-    <section id="skills" className="skills-section  bg-blue-900 py-20">
-      <div className="max-w-7xl mx-auto px-6">
-        <h2 className="text-3xl font-bold text-center mb-8">Skills</h2>
-        <div className="grid grid-cols-3 lg:grid-cols-6 gap-6">
+    <section id="skills"
+     className="skills-section bg-blue-900 py-8 min-h-[500px]  "> 
+      <div className="max-w-7xl mx-auto px-3 ">
+        <h2 className="text-3xl font-bold text-center mb-8 flex-grow">Skills</h2>
+        <div className="grid grid-cols-3 lg:grid-cols-6 gap-6 md:grid-cols-5">
           <button onClick={() => setShowSkills("frontend")}
-            className="px-2 py-3 bg-blue-700 text-white rounded-sm hover:bg-blue-600 w-auto">
+            className="px-2 py-3 bg-blue-700 text-white rounded-sm hover:bg-blue-600 w-auto h-auto">
             Front End
           </button>
           <button onClick={() => setShowSkills("backend")}
@@ -66,13 +67,12 @@ const Skills = () => {
             Database
           </button>
          <button onClick={() => setShowSkills("tools")}
-            className="px-1 py-1 bg-blue-700  text-white rounded-sm hover:bg-blue-600 w-auto">
+            className="px-1 py-1 bg-blue-700  text-white rounded-sm hover:bg-blue-600 w-auto h-auto">
             Tools
         </button>
         </div>
         
-       <div className="skills-icon  grid grid-cols-5 lg:grid-cols-8 gap-2 
-       overflow-visible h-32 mt-3">
+       <div className="skills-icon grid grid-cols-4 lg:grid-cols-6 gap-2 h-32">
           {renderSkills().map((skill,index) => (
 
             <motion.div 

@@ -2,7 +2,7 @@ import React from "react";
 import {motion} from "framer-motion";
 const About = () => {
   return (
-    <section id="about" className="py-20 bg-gray-50">
+    <section id="about" className="py-20 bg-gray-100">
       <motion.div 
       initial={{ opacity: 0, y: 100 }} // Start off-screen and transparent
       whileInView={{ opacity: 1, y: 0 }} // Animate into view
