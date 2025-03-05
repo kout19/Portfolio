@@ -53,20 +53,15 @@ const Header = ({onSignInClick}) => {
                   {section.charAt(0).toUpperCase()+section.slice(1)}
                   
                 </a>
-               
                 </li>
             ))}
-            <li>
-             <Link to="/blog" className="block py-2 px-4 hover:text-blue-500">Blog</Link>
-            </li>
             <li
             ><button
-                onClick={() => { isClicked(); onSignInClick() }} className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700">Sign In</button></li>
-            {/* <li><a href="#about" className=" block py-2 px-4 hover:text-gray-400" onClick={isClicked}>About</a></li>
-            <li><a href="#skills" className="block py-2 px-4 hover:text-gray-400 " onClick={isClicked}>Skills</a></li>
-            <li><a href="#projects" className=" block py-2 px-4 hover:text-gray-400" onClick={isClicked}>Projects</a></li>
-            <li><a href="#contact" className=" block py-2 px-4 hover:text-gray-400" onClick={isClicked}>Contact</a></li>
-            <li ><Link to="/blog" className="block py-2 px-4 hover:text-gray-400" onClick={isClicked}>Blog</Link></li> */}
+                onClick={() => { isClicked(); onSignInClick() }} 
+                className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700">
+                  Sign In
+                </button>
+              </li>
           </ul>
         </nav>
       </div>
