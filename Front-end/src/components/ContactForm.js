@@ -39,64 +39,118 @@ const Contact = () => {
       setLoading(false); // set loading to false after submission (success or failure)
     }
   };
+return (
+  <section id="contact" className="relative py-24 bg-[#0B0016] overflow-hidden">
+    {/* Background Glow */}
+    <div
+      className="absolute right-0 bottom-0 w-[500px] h-[500px] 
+    bg-purple-600/20 blur-[140px] rounded-full pointer-events-none"
+    />
 
-  return (
-    <div className="contact-section grid place-items-center p-8 bg-gray-100">
-      <h2 className="text-2xl font-bold mb-4">Contact Me</h2>
+    <div className="relative max-w-4xl mx-auto px-6">
+      {/* Section Title */}
+      <h2 className="text-3xl md:text-4xl font-semibold text-center text-white mb-12">
+        Contact <span className="text-[#9B4DFF]">Me</span>
+      </h2>
+
+      {/* Form Card */}
       <form
         onSubmit={handleSubmit(onSubmit)}
-        id="contact"
-        className="bg-white rounded p-4 shadow-md w-full lg:w-1/2"
+        className="bg-gradient-to-br from-[#1A0033] to-[#240046]
+        border border-purple-900/40
+        backdrop-blur-lg
+        rounded-xl p-8 space-y-6"
       >
+        {/* Name */}
         <div>
-          <label htmlFor="" className="block mb-1 font-medium">Name</label>
+          <label className="block mb-2 text-purple-300 text-sm">Name</label>
           <input
             type="text"
             {...register("name", { required: "Name is required" })}
-            className="w-full p-2 border rounded"
+            className="w-full px-4 py-3 rounded-md 
+            bg-[#0B0016] text-white
+            border border-purple-800/50
+            focus:outline-none
+            focus:border-[#9B4DFF]
+            transition-all duration-300"
           />
-          {errors.name && <p className="text-red-500 text-sm">{errors.name.message}</p>}
+          {errors.name && (
+            <p className="text-[#9B4DFF] text-sm mt-1">{errors.name.message}</p>
+          )}
         </div>
+
+        {/* Email */}
         <div>
-          <label className="block mb-1 font-medium">Email</label>
+          <label className="block mb-2 text-purple-300 text-sm">Email</label>
           <input
             type="email"
             {...register("email", { required: "Email is required" })}
-            className="w-full p-2 border rounded"
+            className="w-full px-4 py-3 rounded-md 
+            bg-[#0B0016] text-white
+            border border-purple-800/50
+            focus:outline-none
+            focus:border-[#9B4DFF]
+            transition-all duration-300"
           />
-          {errors.email && <p className="text-red-500 text-sm">{errors.email.message}</p>}
-        </div>
-        <div>
-          <label className="block mb-1 font-medium">Message</label>
-          <textarea
-            {...register("message", { required: "Message is required" })}
-            className="w-full p-2 border rounded"
-          ></textarea>
-          {errors.message && <p className="text-red-500 text-sm">{errors.message.message}</p>}
+          {errors.email && (
+            <p className="text-[#9B4DFF] text-sm mt-1">
+              {errors.email.message}
+            </p>
+          )}
         </div>
 
-        {/* Conditionally render the Send button or spinner */}
+        {/* Message */}
+        <div>
+          <label className="block mb-2 text-purple-300 text-sm">Message</label>
+          <textarea
+            rows="5"
+            {...register("message", { required: "Message is required" })}
+            className="w-full px-4 py-3 rounded-md 
+            bg-[#0B0016] text-white
+            border border-purple-800/50
+            focus:outline-none
+            focus:border-[#9B4DFF]
+            transition-all duration-300 resize-none"
+          />
+          {errors.message && (
+            <p className="text-[#9B4DFF] text-sm mt-1">
+              {errors.message.message}
+            </p>
+          )}
+        </div>
+
+        {/* Submit Button */}
         <button
           type="submit"
-          className="px-4 py-2 bg-blue-500 text-white rounded disabled:opacity-50"
-          disabled={loading} // disable the button while loading
+          disabled={loading}
+          className="w-full py-3 rounded-md font-medium text-white
+          bg-gradient-to-r from-[#7B2FF7] to-[#9B4DFF]
+          hover:opacity-90 transition-all duration-300
+          disabled:opacity-50 flex justify-center items-center"
         >
-          {loading ? (
-            <ClipLoader color="#fff" loading={loading} size={20} />
-          ) : (
-            "Send"
-          )}
+          {loading ? <ClipLoader color="#fff" size={20} /> : "Send Message"}
         </button>
 
+        {/* Success Message */}
         {sent && (
-          <div className="bg-green-100 border-l-4 border-green-500 text-green-700 p-4 mt-4" role="alert">
-            <p className="text-green-500 text-sm mt-2">Your message has been sent. Thank you for contacting me.</p>
-            <p className="text-green-500 text-sm mt-2">I will contact you soon!</p>
+          <div
+            className="mt-6 p-4 rounded-md 
+          bg-[#0B0016] border border-[#9B4DFF]/50"
+          >
+            <p className="text-purple-300 text-sm">
+              Your message has been sent successfully.
+            </p>
+            <p className="text-[#9B4DFF] text-sm mt-1">
+              I will contact you soon.
+            </p>
           </div>
         )}
       </form>
     </div>
-  );
+  </section>
+);
+
+ 
 };
 
 export default Contact;

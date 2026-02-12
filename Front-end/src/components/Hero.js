@@ -1,48 +1,76 @@
-import React, { useState } from "react";
-import computerImgage from '../assets/images/computer-3.jpg';
-import Typewriter from 'react-typewriter-effect';
+import React from "react";
+import Typewriter from "react-typewriter-effect";
 
 const Hero = () => {
   return (
     <section
       id="hero"
-      className="h-screen bg-cover bg-center relative"
-      style={{ backgroundImage: `url(${computerImgage})` }}
+      className="relative min-h-screen flex items-center justify-center 
+      bg-[#0B0016] overflow-hidden"
     >
-      <div className="absolute inset-0 bg-black opacity-70">
-        <div className="mx-w-7xl mx-auto px-4 flex flex-col relative z-10 text-center text-white justify-center items-center h-full py-20 mt-10">
-          <h1 className="text-4xl md:text-6xl mb-4 font-bold">
-            Hi, I am Kefyalew
-          </h1>
-          
-          <p className="text-xl mt-4" style={{ fontFamily: 'monospace' }}>
-            <Typewriter
-              textStyle={{ fontSize: '25px', fontWeight: 'normal' }}
-              startDelay={500}
-              cursorColor="black"
-              multiText={['Full Stack Web Developer']}
-              multiTextDelay={1000}
-              typeSpeed={100}
-            />
-          </p>
+      {/* Background Glow */}
+      <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+        <div className="w-[600px] h-[600px] bg-purple-600/30 rounded-full blur-[150px]" />
+      </div>
+
+      {/* Content */}
+      <div className="relative z-10 max-w-4xl px-6 text-center text-white">
+        {/* Small Intro */}
+        <p className="text-purple-300 mb-4 tracking-wide">
+          Hello! I am Kefyalew
+        </p>
+
+        {/* Main Heading */}
+        <h1 className="text-4xl md:text-6xl font-semibold leading-tight">
+          I’m a Software Engineer.
+        </h1>
+
+        {/* Typewriter Line */}
+        <div className="mt-6 text-lg md:text-xl text-purple-200">
+          <Typewriter
+            textStyle={{ fontSize: "22px" }}
+            startDelay={500}
+            cursorColor="#9B4DFF"
+            multiText={[
+              "Software Engineer",
+              "Full Stack Web Developer",
+              "Technical Instructor"
+              ,
+            ]}
+            multiTextDelay={1000}
+            typeSpeed={80}
+            multiTextLoop={true}
+          />
+        </div>
+
+        {/* Description */}
+        <p className="mt-6 text-purple-300 max-w-2xl mx-auto leading-relaxed">
+          A passionate full-stack developer building meaningful and
+          high-performance digital products that balance user experience and
+          business goals.
+        </p>
+
+        {/* CTA */}
+        <div className="mt-8">
           <a
             href="#contact"
-            className="mt-6 px-6 py-3 bg-blue-600 hover:bg-blue-500 text-white rounded-full transition-all duration-300 transform hover:scale-105"
+            className="px-8 py-3 rounded-md font-medium text-white
+            bg-gradient-to-r from-[#7B2FF7] to-[#9B4DFF]
+            hover:opacity-90 transition-all duration-300"
           >
             Hire Me
           </a>
         </div>
       </div>
 
-      {/* Scroll Down Indicator */}
-      <div className="absolute bottom-5 w-full flex justify-center">
+      {/* Scroll Indicator */}
+      <div className="absolute bottom-8 w-full flex justify-center">
         <a href="#about">
           <svg
-            className="w-8 h-8 text-white animate-bounce"
+            className="w-8 h-8 text-purple-400 animate-bounce"
             fill="none"
             stroke="currentColor"
             viewBox="0 0 24 24"
-            xmlns="http://www.w3.org/2000/svg"
           >
             <path
               strokeLinecap="round"
