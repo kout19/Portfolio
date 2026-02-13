@@ -1,39 +1,21 @@
-import React, { useState } from "react";
+import React from "react";
 import "devicon/devicon.min.css";
 import { motion } from "framer-motion";
 
-const Skills = () => {
-  const [activeCategory, setActiveCategory] = useState("frontend");
+const skills = [
+  { name: "React", icon: "devicon-react-original colored" },
+  { name: "Node.js", icon: "devicon-nodejs-plain colored" },
+  { name: "Express", icon: "devicon-express-original" },
+  { name: "MongoDB", icon: "devicon-mongodb-plain colored" },
+  { name: "JavaScript", icon: "devicon-javascript-plain colored" },
+  { name: "Tailwind", icon: "devicon-tailwindcss-plain colored" },
+  { name: "MySQL", icon: "devicon-mysql-plain colored" },
+  { name: "Python", icon: "devicon-python-plain colored" },
+  { name: "PHP", icon: "devicon-php-plain colored" },
+];
 
-  const categories = {
-    frontend: [
-      { name: "HTML", icon: "devicon-html5-plain colored" },
-      { name: "CSS", icon: "devicon-css3-plain colored" },
-      { name: "TailwindCSS", icon: "devicon-tailwindcss-plain colored" },
-      { name: "Bootstrap", icon: "devicon-bootstrap-plain colored" },
-      { name: "JavaScript", icon: "devicon-javascript-plain colored" },
-      { name: "React", icon: "devicon-react-original colored" },
-      { name: "jQuery", icon: "devicon-jquery-plain colored" },
-    ],
-    backend: [
-      { name: "Node.js", icon: "devicon-nodejs-plain colored" },
-      { name: "Express", icon: "devicon-express-original colored" },
-      { name: "PHP", icon: "devicon-php-plain colored" },
-    ],
-    database: [
-      { name: "MySQL", icon: "devicon-mysql-plain colored" },
-      { name: "Firebase", icon: "devicon-firebase-plain colored" },
-      { name: "SQLite", icon: "devicon-sqlite-plain colored" },
-      { name: "MongoDB", icon: "devicon-mongodb-plain colored" },
-    ],
-    tools: [
-      { name: "Stripe", icon: "devicon-stripe-plain colored" },
-      { name: "npm", icon: "devicon-npm-original-wordmark colored" },
-      { name: "REST", icon: "devicon-postgresql-plain colored" },
-      { name: "Postman", icon: "devicon-postman-plain colored" },
-      { name: "Git", icon: "devicon-git-plain colored" },
-    ],
-  };
+const Skills = () => {
+  const radius = 220;
 
   return (
     <section
@@ -41,57 +23,89 @@ const Skills = () => {
       className="relative py-24 bg-[#0B0016] overflow-hidden"
     >
       {/* Background Glow */}
-      <div className="absolute right-0 top-20 w-[500px] h-[500px] 
-      bg-purple-600/20 blur-[140px] rounded-full pointer-events-none" />
+      <div className="absolute inset-0 flex justify-center">
+        <div className="w-[600px] h-[600px] bg-purple-600/20 blur-[180px] rounded-full " />
+      </div>
 
-      <div className="relative max-w-7xl mx-auto px-6">
-
-        {/* Section Title */}
-        <h2 className="text-3xl md:text-4xl font-semibold text-center text-white mb-12">
-          My <span className="text-[#9B4DFF]">Skills</span>
+      <div className="relative max-w-6xl mx-auto text-center">
+        <h2 className="text-4xl font-semibold text-white mb-20">
+          My <span className="text-[#9B4DFF]">Tech Stack</span>
         </h2>
 
-        {/* Category Buttons */}
-        <div className="flex flex-wrap justify-center gap-4 mb-12">
-          {Object.keys(categories).map((key) => (
-            <button
-              key={key}
-              onClick={() => setActiveCategory(key)}
-              className={`px-6 py-2 rounded-md text-sm font-medium transition-all duration-300
-              ${
-                activeCategory === key
-                  ? "bg-gradient-to-r from-[#7B2FF7] to-[#9B4DFF] text-white"
-                  : "bg-[#1A0033] text-purple-300 hover:text-white hover:bg-[#240046]"
-              }`}
-            >
-              {key.charAt(0).toUpperCase() + key.slice(1)}
-            </button>
-          ))}
-        </div>
+        <div className="relative flex items-center justify-center h-[300px]">
+          {/* Center Core */}
+          <div
+            className="absolute w-40 h-40 rounded-full
+            bg-gradient-to-br from-[#7B2FF7] to-[#9B4DFF]
+            flex items-center justify-center
+            text-white text-5xl font-bold
+            shadow-[0_0_80px_rgba(155,77,255,0.6)]"
+          >
+            Σ
+          </div>
 
-        {/* Skills Grid */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6">
-          {categories[activeCategory].map((skill, index) => (
+          {/* 3D Perspective Wrapper */}
+          <div
+            className="absolute sm:w-[400px] sm:h-[400px] w-[300px] h-[300px]"
+            style={{
+              width: radius * 2,
+              height: radius * 2,
+              transform: "perspective(1000px) rotateX(65deg)",
+              transformStyle: "preserve-3d",
+            }}
+          >
+            {/* Orbit Ring */}
+            <div
+              className="absolute border border-purple-800/40 rounded-full"
+              style={{
+                width: "100%",
+                height: "100%",
+              }}
+            />
+
+            {/* Rotating Orbit */}
             <motion.div
-              key={skill.name}
-              initial={{ opacity: 0, y: 40 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: index * 0.05 }}
-              viewport={{ once: true }}
-              className="flex flex-col items-center justify-center 
-              p-6 rounded-xl 
-              bg-gradient-to-br from-[#1A0033] to-[#240046]
-              border border-purple-900/40
-              hover:border-[#9B4DFF]/60
-              transition-all duration-300
-              hover:scale-105"
+              animate={{ rotateZ: 360 }}
+              transition={{
+                repeat: Infinity,
+                duration: 25,
+                ease: "linear",
+              }}
+              className="absolute w-full h-full"
+              style={{ transformStyle: "preserve-3d" }}
             >
-              <i className={`${skill.icon} text-4xl mb-3`} />
-              <p className="text-purple-200 text-sm">{skill.name}</p>
-            </motion.div>
-          ))}
-        </div>
+              {skills.map((skill, index) => {
+                const angle = (360 / skills.length) * index;
 
+                return (
+                  <div
+                    key={skill.name}
+                    className="absolute top-1/2 left-1/2"
+                    style={{
+                      transform: `
+                        rotate(${angle}deg)
+                        translateY(-${radius}px)
+                        rotate(-${angle}deg)
+                      `,
+                      transformOrigin: "center",
+                    }}
+                  >
+                    <div
+                      className="w-16 h-16 rounded-full
+                      bg-gradient-to-br from-[#1A0033] to-[#240046]
+                      border border-purple-900/40
+                      hover:border-[#9B4DFF]/60
+                      flex items-center justify-center
+                      shadow-lg transition duration-300 hover:scale-110"
+                    >
+                      <i className={`${skill.icon} text-3xl`} />
+                    </div>
+                  </div>
+                );
+              })}
+            </motion.div>
+          </div>
+        </div>
       </div>
     </section>
   );
