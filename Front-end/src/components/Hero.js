@@ -24,7 +24,7 @@ const Hero = () => {
             <img
               src={avatar}
               alt="Kefyalew Avatar"
-              className="relative w-25 h-25 md:w-36 md:h-36 
+              className="relative w-32 h-32 md:w-36 md:h-36 
               rounded-full object-cover border border-purple-500/40 "
             />
           </div>
@@ -47,7 +47,6 @@ const Hero = () => {
                 cursorColor="#9B4DFF"
                 multiText={[
                   "Full Stack Web Developer",
-                  "Software Engineer",
                   "Technical Instructor",
                 ]}
                 multiTextDelay={1000}
