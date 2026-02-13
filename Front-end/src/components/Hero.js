@@ -1,85 +1,92 @@
 import React from "react";
 import Typewriter from "react-typewriter-effect";
+import avatar from "../assets/images/avater.png";
 
 const Hero = () => {
   return (
     <section
       id="hero"
-      className="relative min-h-screen flex items-center justify-center 
-      bg-[#0B0016] overflow-hidden"
+      className="relative min-h-screen flex items-center 
+      bg-[#0B0016] overflow-hidden pt-4"
     >
       {/* Background Glow */}
       <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-        <div className="w-[600px] h-[600px] bg-purple-600/30 rounded-full blur-[150px]" />
+        <div className="w-[700px] h-[700px] bg-purple-600/20 rounded-full blur-[160px]" />
       </div>
 
-      {/* Content */}
-      <div className="relative z-10 max-w-4xl px-6 text-center text-white">
-        {/* Small Intro */}
-        <p className="text-purple-300 mb-4 tracking-wide">
-          Hello! I am Kefyalew
-        </p>
+      <div className="relative z-10 max-w-7xl mx-auto px-6 w-full">
+        <div className="flex flex-col md:flex-row items-center justify-center gap-6 md:gap-8">
+          {/* LEFT SIDE — AVATAR */}
+          <div className="flex justify-center relative mt-16">
+            {/* Soft halo */}
+            <div className="absolute w-40 h-40 bg-[#9B4DFF]/40 rounded-full blur-[70px]" />
 
-        {/* Main Heading */}
-        <h1 className="text-4xl md:text-6xl font-semibold leading-tight">
-          I’m a Software Engineer.
-        </h1>
-
-        {/* Typewriter Line */}
-        <div className="mt-6 text-lg md:text-xl text-purple-200">
-          <Typewriter
-            textStyle={{ fontSize: "22px" }}
-            startDelay={500}
-            cursorColor="#9B4DFF"
-            multiText={[
-              "Software Engineer",
-              "Full Stack Web Developer",
-              "Technical Instructor"
-              ,
-            ]}
-            multiTextDelay={1000}
-            typeSpeed={80}
-            multiTextLoop={true}
-          />
-        </div>
-
-        {/* Description */}
-        <p className="mt-6 text-purple-300 max-w-2xl mx-auto leading-relaxed">
-          A passionate full-stack developer building meaningful and
-          high-performance digital products that balance user experience and
-          business goals.
-        </p>
-
-        {/* CTA */}
-        <div className="mt-8">
-          <a
-            href="#contact"
-            className="px-8 py-3 rounded-md font-medium text-white
-            bg-gradient-to-r from-[#7B2FF7] to-[#9B4DFF]
-            hover:opacity-90 transition-all duration-300"
-          >
-            Hire Me
-          </a>
-        </div>
-      </div>
-
-      {/* Scroll Indicator */}
-      <div className="absolute bottom-8 w-full flex justify-center">
-        <a href="#about">
-          <svg
-            className="w-8 h-8 text-purple-400 animate-bounce"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="2"
-              d="M19 9l-7 7-7-7"
+            <img
+              src={avatar}
+              alt="Kefyalew Avatar"
+              className="relative w-25 h-25 md:w-36 md:h-36 
+              rounded-full object-cover border border-purple-500/40 "
             />
-          </svg>
-        </a>
+          </div>
+
+          {/* RIGHT SIDE — TEXT */}
+          <div className="text-center text-white max-w-xl">
+            <p className="text-purple-300 mb-3 tracking-wide text-sm md:text-base">
+              Hello! I am <span className="text-[#9B4DFF]">Kefyalew</span>
+            </p>
+
+            <h1 className="text-3xl md:text-5xl font-semibold leading-tight">
+              I’m a Software Engineer.
+            </h1>
+
+            {/* Looping Typewriter */}
+            <div className="mt-4 text-base md:text-lg text-purple-200">
+              <Typewriter
+                textStyle={{ fontSize: "20px" }}
+                startDelay={500}
+                cursorColor="#9B4DFF"
+                multiText={[
+                  "Full Stack Web Developer",
+                  "Software Engineer",
+                  "Technical Instructor",
+                ]}
+                multiTextDelay={1000}
+                typeSpeed={80}
+                multiTextLoop={true}
+              />
+            </div>
+
+            <p className="mt-5 text-purple-300 leading-relaxed text-sm md:text-base">
+              A passionate full-stack developer building meaningful and
+              high-performance digital products that balance user experience and{" "}
+              <span className="text-[#9B4DFF] inline-block">
+                <Typewriter
+                  textStyle={{ fontSize: "16px", display: "inline" }}
+                  startDelay={500}
+                  cursorColor="#9B4DFF"
+                  multiText={[
+                    "business goals.",
+                    "business impact.",
+                    "measurable outcomes.",
+                  ]}
+                  multiTextDelay={1900}
+                  typeSpeed={80}
+                />
+              </span>
+            </p>
+
+            <div className="mt-6">
+              <a
+                href="#contact"
+                className="px-6 py-2.5 rounded-md text-sm md:text-base font-medium text-white
+                bg-gradient-to-r from-[#7B2FF7] to-[#9B4DFF]
+                hover:opacity-90 transition-all duration-300"
+              >
+                Hire Me
+              </a>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
   );
