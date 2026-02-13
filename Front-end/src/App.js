@@ -5,7 +5,7 @@ import Home from "./pages/Home";
 import Blog from "./pages/Blog";
 import AdminDashboard from "./admin/components/dashboard";
 import ProtectedRoute from "./admin/components/protectedRoute";
-import PostBlog from "./admin/components/postBlog";
+// import PostBlog from "./admin/components/postBlog";
 function App() {
   return (
     <Router>

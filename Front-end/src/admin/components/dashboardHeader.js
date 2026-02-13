@@ -72,7 +72,7 @@ const handleDeleteNotification = async (notificationId, event) => {
   event.stopPropagation();
   try {
     const response = await axios.delete(`${uri}/notifications/${notificationId}`);
-    // console.log(response.data);
+     console.log(response.data);
       setNotifications((prev) => prev.filter((notification) =>notification._id !== notificationId));
       // setSelectedNotification(null);
       console.log("Notification deleted successfully");
@@ -90,10 +90,10 @@ const handleDeleteNotification = async (notificationId, event) => {
     localStorage.removeItem('token');
     navigate('/');
   };
-  //Toggling user  profile
-   const hanldeDropdown = () => {
-    setShowDropdown(!showDropdown);
-  }
+  // //Toggling user  profile
+  //  const hanldeDropdown = () => {
+  //   setShowDropdown(!showDropdown);
+  // }
   useEffect(() => {
     fetchUnreadCount();
   },[]);
@@ -145,7 +145,7 @@ const handleDeleteNotification = async (notificationId, event) => {
                   <li
                     key={notification._id}
                     onClick={() => {handleNotificationClick(notification._id)
-                    notifications.filter((notification) => notification._id ===notification._id).forEach((message) =>markAsRead(message._id))
+                    notifications.filter((notification) => notification.status ==='unread').forEach((message) =>markAsRead(message._id))
                     }}
                     
                     className={`px-4 py-2 text-sm  ${
