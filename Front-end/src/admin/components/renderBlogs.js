@@ -52,12 +52,12 @@ const FetchBlogs = () => {
         >
           <h2 className="text-2xl font-semibold text-gray-800">{post.title}</h2>
           <p className="text-gray-700 leading-realxed">{post.content}</p>
-         <p>{post.image?.url && (
+         {/* <p>{post.image?.url && (
             <img src={`http://localhost:5000/${post.image.url}`}
               alt="blog image"
               className="w-64 max-h-60 object-cover rounded-lg transition-transform duraition-300 "
             />
-         )}</p> 
+         )}</p>  */}
           <div className="flex items-center space-x-4 mt-4">
             <button onClick={() => handleLike(post._id)}
               className="flex items-center bg-white-500 text-gray-600  hover:text-blue-600 ">

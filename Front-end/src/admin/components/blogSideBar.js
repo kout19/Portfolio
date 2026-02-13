@@ -9,7 +9,7 @@ const SideBar = ({setSelectedComponenet}) => {
   }
   return (
     <>
-      <button 
+      <button
         className="md:hidden p-2 bg-gray-800 text-white fixed top-10 left-0 z-50"
         onClick={()=>setIsOpen(!isOpen)}
       >

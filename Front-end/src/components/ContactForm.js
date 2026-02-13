@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { ClipLoader } from "react-spinners";
 
@@ -22,7 +22,7 @@ const Contact = () => {
         },
         body: JSON.stringify(data), // send form data to the backend
       });
-      const result = await response.json();
+      // const result = await response.json();
       
       if (response.ok) {
         setSent(true);
