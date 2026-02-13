@@ -4,7 +4,7 @@ import axios from "axios";
 import ReactQuill from 'react-quill';
 const uri=process.env.REACT_APP_BACKEND_URL;
 const PostBlog = () => {
-  const { register, handleSubmit, reset,setValue, trigger } = useForm();
+  const { register, handleSubmit,setValue, trigger } = useForm();
   const [content, setContenet] = useState('');
   const [imagePreview, setImagePreview] = useState('');
   const [tags, setTags] = useState([]);

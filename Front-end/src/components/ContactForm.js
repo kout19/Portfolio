@@ -22,7 +22,6 @@ const Contact = () => {
         },
         body: JSON.stringify(data), // send form data to the backend
       });
-      // const result = await response.json();
       
       if (response.ok) {
         setSent(true);

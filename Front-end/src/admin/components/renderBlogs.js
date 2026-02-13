@@ -8,9 +8,9 @@ const FetchBlogs = () => {
     try {
       const response = await axios.get(`${uri}/admin/blogs/data`);
       // console.log(response.data);
-      response.data.map((obj) => {
-        // console.log(obj.image.url)
-      });
+      // response.data.map((obj) => {
+      //   // console.log(obj.image.url)
+      // });
       setPosts(response.data);
       const initialLikes = {};
       response.data.forEach((like) => {
