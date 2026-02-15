@@ -19,12 +19,12 @@ const Hero = () => {
           {/* LEFT SIDE — AVATAR */}
           <div className="flex justify-center relative mt-16">
             {/* Soft halo */}
-            <div className="absolute w-40 h-40 bg-[#9B4DFF]/40 rounded-full blur-[70px]" />
+            <div className="absolute w-32 h-32 bg-[#9B4DFF]/40 rounded-full blur-[70px]" />
 
             <img
               src={avatar}
               alt="Kefyalew Avatar"
-              className="relative w-32 h-32 md:w-36 md:h-36 
+              className="relative w-24 h-24 md:w-32 md:h-32
               rounded-full object-cover border border-purple-500/40 "
             />
           </div>

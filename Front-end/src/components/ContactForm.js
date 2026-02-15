@@ -39,7 +39,7 @@ const Contact = () => {
     }
   };
 return (
-  <section id="contact" className="relative py-24 bg-[#0B0016] overflow-hidden">
+  <section id="contact" className="relative py-8 bg-[#0B0016] overflow-hidden">
     {/* Background Glow */}
     <div
       className="absolute right-0 bottom-0 w-[500px] h-[500px] 
@@ -66,7 +66,7 @@ return (
           <input
             type="text"
             {...register("name", { required: "Name is required" })}
-            className="w-full px-4 py-3 rounded-md 
+            className="w-full px-4 py-2 rounded-md 
             bg-[#0B0016] text-white
             border border-purple-800/50
             focus:outline-none
@@ -84,7 +84,7 @@ return (
           <input
             type="email"
             {...register("email", { required: "Email is required" })}
-            className="w-full px-4 py-3 rounded-md 
+            className="w-full px-4 py-2 rounded-md 
             bg-[#0B0016] text-white
             border border-purple-800/50
             focus:outline-none
@@ -104,7 +104,7 @@ return (
           <textarea
             rows="5"
             {...register("message", { required: "Message is required" })}
-            className="w-full px-4 py-3 rounded-md 
+            className="w-full px-4 py-2 rounded-md 
             bg-[#0B0016] text-white
             border border-purple-800/50
             focus:outline-none
