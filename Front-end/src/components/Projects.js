@@ -8,7 +8,7 @@ const projects = [
     title: "SACCO Management System",
     description:
       "A full-featured SACCO platform handling member registration, loan processing, savings tracking, and reporting.",
-    tech: ["React", "Node.js", "MongoDB", "Express"],
+    tech: ["React", "Node.js", "MongoDB", "Express","Tailwind css", "Redux"],
     image: saccoImg,
     github: "https://github.com/kout19/sacco-system",
     liveDemo: "#",
@@ -17,7 +17,7 @@ const projects = [
     title: "Book Rental System",
     description:
       "A modern rental platform for managing book inventory, user rentals, due dates, and return workflows.",
-    tech: ["React", "Node.js", "MongoDB"],
+    tech: ["React", "Node.js", "MongoDB", "Express", "Tailwind css", "Stripe"],
     image: bookImg,
     github: "https://github.com/kout19/Book_Rental",
     liveDemo: "https://book-rental-one.vercel.app/",
