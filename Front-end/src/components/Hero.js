@@ -32,7 +32,7 @@ const Hero = () => {
           {/* RIGHT SIDE — TEXT */}
           <div className="text-center text-white max-w-xl">
             <p className="text-purple-300 mb-3 tracking-wide text-sm md:text-base">
-              Hello! I am <span className="text-[#9B4DFF]">Kefyalew</span>
+              Hi, I am <span className="text-[#9B4DFF]">Kefyalew</span>
             </p>
 
             <h1 className="text-3xl md:text-5xl font-semibold leading-tight">

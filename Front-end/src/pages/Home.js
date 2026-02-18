@@ -7,7 +7,7 @@ import Projects from "../components/Projects";
 import Contact from "../components/ContactForm";
 import Footer from "../components/Footer";
 import SingInForms from "../components/singin";
-
+import Chatbot from "../chatbot/Chatbot";
 const Home = () => {
   const [isFormVisible, setIsFormVisible] = useState(false);
 
@@ -29,6 +29,7 @@ const Home = () => {
       <Projects />
       <Contact />
       <Footer />
+      <Chatbot />
     </>
   );
 };
