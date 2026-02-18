@@ -57,7 +57,7 @@ const ChatBot = () => {
 
       {/* Chat Window */}
       {isOpen && (
-        <div className="bg-white dark:bg-slate-900 w-80 sm:w-96 h-[500px] rounded-2xl shadow-2xl flex flex-col border border-slate-200 dark:border-slate-800 overflow-hidden">
+        <div className="bg-white dark:bg-slate-900 w-64 sm:w-96 h-[440px] font-samll rounded-2xl shadow-2xl flex flex-col border border-slate-200 dark:border-slate-800 overflow-hidden">
           {/* Header */}
           <div className="bg-blue-600 p-4 text-white flex justify-between items-center">
             <div className="flex items-center gap-2">
@@ -77,7 +77,7 @@ const ChatBot = () => {
                 className={`flex ${m.role === "user" ? "justify-end" : "justify-start"}`}
               >
                 <div
-                  className={`max-w-[80%] p-3 rounded-2xl text-sm ${
+                  className={`max-w-[80%] p-3 rounded-2xl text-xs  sm:text-sm ${
                     m.role === "user"
                       ? "bg-blue-600 text-white rounded-tr-none"
                       : "bg-slate-100 dark:bg-slate-800 dark:text-slate-200 rounded-tl-none"
