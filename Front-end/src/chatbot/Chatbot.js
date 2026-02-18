@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { MessageCircle, Send, X, User, Bot } from "lucide-react";
+import { MessageCircle, Send, X } from "lucide-react";
 
 const ChatBot = () => {
   const [isOpen, setIsOpen] = useState(false);
