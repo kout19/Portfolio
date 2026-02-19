@@ -29,7 +29,7 @@ const ChatBot = () => {
     try {
       // Logic for FastAPI Fetch will go here later
       const response = await fetch(
-        `http://localhost:8000/chat?user_message=${encodeURIComponent(input)}`,
+        `https://portfolio-2-3tot.onrender.com/chat?user_message=${encodeURIComponent(input)}`,
       );
       const data = await response.json();
       setMessages((prev) => [...prev, { role: "bot", text: data.reply }]);
