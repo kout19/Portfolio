@@ -5,56 +5,65 @@ from fastapi.middleware.cors import CORSMiddleware
 from dotenv import load_dotenv
 
 load_dotenv()
+genai.configure(api_key=os.getenv("GEMINI_API_KEY"))
 
-# 1. SETUP
-api_key = os.getenv("GEMINI_API_KEY")
-# Using 'rest' transport is more stable on hosted servers like Render
-genai.configure(api_key=api_key, transport='rest')
+# --- AUTOMATIC MODEL DISCOVERY ---
+def get_available_model():
+    try:
+        for m in genai.list_models():
+            # Look for the newest flash or pro models available to YOU
+            if 'generateContent' in m.supported_generation_methods:
+                print(f"DEBUG: Found working model: {m.name}")
+                # We return the first one that matches 'flash' (fastest) 
+                # or 'pro' (smartest)
+                if "flash" in m.name or "pro" in m.name:
+                    return m.name
+    except Exception as e:
+        print(f"DEBUG: Could not list models: {e}")
+    return "gemini-1.5-flash" # Fallback
 
-# 2. INITIALIZE MODEL (We skip the 'pre-test' to avoid startup quota errors)
-model = genai.GenerativeModel('gemini-1.5-flash')
+WORKING_MODEL_NAME = get_available_model()
+model = genai.GenerativeModel(WORKING_MODEL_NAME)
+# ---------------------------------
 
-app = FastAPI(title="Kefyalew Portfolio AI")
-
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=["*"],
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
+app = FastAPI()
+app.add_middleware(CORSMiddleware, allow_origins=["*"], allow_methods=["*"], allow_headers=["*"])
 
 MY_CONTEXT = """
-Identity: You are the AI Assistant for Kefyalew, a Software Engineer & Job Consultant.
-Expertise: MERN Stack, FastAPI, Tailwind CSS, C++, Java, PHP.
-Projects: SACCO System (In dev), Book Rental (Done).
-Contact: koutlook19@mmail.com.
+Identity: You are the Official AI Assistant for Kefyalew, a Software Engineer and Full-Stack Developer.
+Tone: Professional, sophisticated, and highly concise.
+
+Technical Toolkit: 
+- MERN Stack (MongoDB, Express, React, Node.js), FastAPI, Tailwind CSS.
+- Programming: C++, Java, PHP, Python.
+
+Key Projects:
+1. SACCO Management System (Active Development): A financial platform built with MERN & Redux for loan and savings processing.
+2. Book Rental System (Completed): A modern inventory and rental platform integrated with Stripe for payments.
+
+Current Focus: 
+Developing scalable fintech solutions and providing expert Online Job Application/Resume Consulting.
+
+Contact Protocol:
+- Direct: koutlook19@mmail.com / +251 903055719.
+- Preferred: Encourage users to use the 'Contact Form' on this site. Messages go directly to Kefyalew’s private dashboard for a prioritized response.
+
+Constraints: 
+- Answer in 2-3 sentences max. 
+- If a user asks to hire Kefyalew, guide them immediately to the Contact Form.
+- Do not speculate on information not provided here.
 """
+
 
 @app.get("/chat")
 async def chat(user_message: str = Query(...)):
     try:
-        # Construct a simple prompt to avoid safety filters
-        prompt = f"{MY_CONTEXT}\n\nUser Question: {user_message}"
-        
-        # Call Gemini
-        response = model.generate_content(prompt)
-        
-        if response.text:
-            return {"reply": response.text}
-        return {"reply": "I'm thinking, but I couldn't generate a text response. Try again!"}
-
+        # We use the model name found during startup
+        response = model.generate_content(f"{MY_CONTEXT}\n\nUser: {user_message}")
+        return {"reply": response.text}
     except Exception as e:
-        error_msg = str(e)
-        print(f"ERROR: {error_msg}")
-        
-        # Check for the specific 'Location' error
-        if "location" in error_msg.lower():
-            return {"reply": "Google Gemini is restricted in the server's current region.", "error": error_msg}
-        
-        return {"reply": "Connection issue. Please try one more time.", "error": error_msg}
+        return {"reply": f"Still failing with {WORKING_MODEL_NAME}", "error": str(e)}
 
 if __name__ == "__main__":
     import uvicorn
-    port = int(os.environ.get("PORT", 8000))
-    uvicorn.run(app, host="0.0.0.0", port=port)
+    uvicorn.run(app, host="0.0.0.0", port=8000)
